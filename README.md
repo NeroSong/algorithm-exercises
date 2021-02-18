@@ -1,1 +1,1 @@
-Just some daily algorithm exercises.
+Just some daily algorithm exercises records.
