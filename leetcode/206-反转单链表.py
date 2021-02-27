@@ -62,6 +62,25 @@ def reverseList_recur(head: ListNode) -> ListNode:
     return p
 
 
+# 双指针法
+# 之所以要双指针，是因为在单链表中遍历反序，
+# 一个指针要确定下一个节点的位置，
+# 另一个则负责记录前一个节点的位置，好让当前节点的next掉头
+# 时间复杂度O(n)，完整遍历，空间复杂度O(1)。实际上因为操作更少，是最快的方案
+def reverseList_double_point(head: ListNode) -> ListNode:
+    cur = None
+    flag = head
+    # flag是当前要改指向的节点，开始后就移向下一个节点
+    # cur代表上一个节点，改完之后同步前进到当前节点
+    # 最后当前节点跟上flag的步伐
+    while flag != None:
+        flag = head.next
+        head.next = cur
+        cur = head
+        head = flag
+    return cur
+
+
 def showList(head: ListNode) -> None:
     ls = []
     while head != None:
@@ -79,6 +98,16 @@ if __name__ == "__main__":
         ln.next = ListNode(i)
         ln = ln.next
 
+    # 测试空节点
+    head1 = None
+
+    # 不同方法
     # nln = reverseList_new(head0)
-    nln = reverseList_recur(head0)
+    # nln = reverseList_recur(head0)
+    nln = reverseList_double_point(head0)
     showList(nln)
+
+    # nln = reverseList_new(head0)
+    # nln = reverseList_recur(head0)
+    nln2 = reverseList_double_point(head1)
+    showList(nln2)
